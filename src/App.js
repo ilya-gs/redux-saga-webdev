@@ -1,18 +1,32 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { counterActionCreators } from "./redux/actionCreator";
+ 
 
 function App() {
-  const store = useSelector(store => {
-    return store
-  })
+  const state = useSelector(store => store.counter)
+  const dispatch = useDispatch ()
 
-  console.log("🚀 ~ file: App.js:5 ~ App ~ store", store)
+  //  const [count,setCount]= useState(0);
+
+
+//  console.log("🚀 ~ file: App.js:5 ~ App ~ store", state)
   
-
+  function handleDecrease(){
+    dispatch(counterActionCreators.DECREASE());
+//    dispatch(counterActionCreators[counterActions.DECREASE]())
+  }
+  function handleIncrease(){
+    dispatch(counterActionCreators.INCREASE());
+  }
 
   return (
-    <h1>
-      Hello 
-    </h1>
+    <div style={{margin: 20}}>
+      <button onClick={handleIncrease}>Increase</button>
+      <button onClick={handleDecrease}>Decrease</button>
+      <h1>
+        {state.count}
+      </h1>
+    </div>
   );
 }
 
