@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { counterActionCreators } from "./redux/actionCreator";
+import { counterActionCreators, newsActionCreators } from "./redux/actionCreator";
  
 
 function App() {
@@ -8,7 +8,7 @@ function App() {
 
   //  const [count,setCount]= useState(0);
 
-
+ 
 //  console.log("🚀 ~ file: App.js:5 ~ App ~ store", state)
   
   function handleDecrease(){
@@ -19,10 +19,15 @@ function App() {
     dispatch(counterActionCreators.INCREASE());
   }
 
+  function handleGetNews(){
+    dispatch(newsActionCreators.GET());
+  }
+
   return (
     <div style={{margin: 20}}>
       <button onClick={handleIncrease}>Increase</button>
       <button onClick={handleDecrease}>Decrease</button>
+      <button onClick={handleGetNews}>Get News</button>
       <h1>
         {state.count}
       </h1>

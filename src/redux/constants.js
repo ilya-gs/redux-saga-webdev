@@ -3,3 +3,7 @@ export const counterActions = {
     DECREASE: "DECREASE"
 }
 
+export const newsActions = {
+    GET: "GET",
+}
+
