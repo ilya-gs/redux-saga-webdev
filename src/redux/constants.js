@@ -1,9 +1,11 @@
 export const counterActions = {
-    INCREASE: "INCREASE",
-    DECREASE: "DECREASE"
+    INCREASE: "COUNTER_INCREASE",
+    DECREASE: "COUNTER_DECREASE"
 }
 
 export const newsActions = {
-    GET: "GET",
+    GET_ALL: "NEWS_GET_ALL",
+    SET_LATEST: "NEWS_SET_LATEST",
+    SET_POPULAR: "NEWS_SET_POPULAR",
 }
 

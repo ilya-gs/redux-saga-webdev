@@ -1,10 +1,10 @@
 export function createActionCreators(actions)
 {
     const ret = {};
-    Object.keys(actions).forEach(action =>{
-        ret[action] = (payload = undefined) => {
-            return {type: action, payload: payload}
+    for (const [key, value] of Object.entries(actions)){
+        ret[key] = (payload = undefined) => {
+            return {type: value, payload: payload}
         }
-    })
+    }
     return ret;
 }
