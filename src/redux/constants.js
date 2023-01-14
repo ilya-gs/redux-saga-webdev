@@ -4,7 +4,8 @@ export const counterActions = {
 }
 
 export const newsActions = {
-    GET_ALL: "NEWS_GET_ALL",
+    GET_LATEST: "NEWS_GET_LATEST",
+    GET_POPULAR: "NEWS_GET_POPULAR",
     SET_LATEST: "NEWS_SET_LATEST",
     SET_POPULAR: "NEWS_SET_POPULAR",
 }

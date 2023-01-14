@@ -18,7 +18,9 @@ export function* handleLatestNews() {
         yield put(errorActionCreators.SET_LATEST_ERROR('Error fetching LATEST: ' + error));
     }
 }
-    
+
+//====================================================//
+
 export function* handlePopularNews() {
     try {
         const data = yield call(getPopularNews);
@@ -29,21 +31,30 @@ export function* handlePopularNews() {
     }
 }
 
+//====================================================//
 
-export function* handleNews(){
-    yield fork(handleLatestNews);
-    yield fork(handlePopularNews);
-}
+export function* watchPopularNews() {
+    // yield takeEvery(newsActions.GET_LATEST, handleLatestNews);
+    yield takeEvery(newsActions.GET_POPULAR, handlePopularNews);
 
-export function* watchClickSaga(){
-    yield takeEvery(newsActions.GET_ALL, handleNews);
-    
     // yield take(counterActions.DECREASE);
     // console.log("watch 2");
 }
 
+//====================================================//
 
-export default function* rootSaga(){
+export function* watchLatestNews() {
+    yield takeEvery(newsActions.GET_LATEST, handleLatestNews);
+    // yield takeEvery(newsActions.GET_POPULAR, handlePopularNews);
+
+}
+
+//====================================================//
+
+export default function* rootSaga() {
     // console.log("🚀 ~ file: index.js:4 ~ rootSaga ~ HEllo SAGA world")
-    yield watchClickSaga();
+    yield all([
+        fork(watchLatestNews),
+        fork(watchPopularNews),
+    ])
 }
