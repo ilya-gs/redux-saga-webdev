@@ -9,3 +9,9 @@ export const newsActions = {
     SET_POPULAR: "NEWS_SET_POPULAR",
 }
 
+export const errorActions = {
+    SET_LATEST_ERROR: "NEWS_SET_LATEST_ERROR",
+    SET_POPULAR_ERROR: "NEWS_SET_POPULAR_ERROR",
+}
+
+

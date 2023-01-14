@@ -6,6 +6,7 @@ import News from "./components/news/news";
 function App() {
   const latestNews = useSelector(store => store?.news?.latestNews || []);
   const popularNews = useSelector(store => store?.news?.popularNews || []);
+  const { latestNews: latestNewsError, popularNews: popularNewsError } = useSelector(store => store?.errors || {});  
   const dispatch = useDispatch ()
 
   //  const [count,setCount]= useState(0);
@@ -20,8 +21,8 @@ function App() {
   return (
     <div>
       <button onClick={handleNews}>Get News</button>
-      <News news={latestNews} title="Latest News" />
-      <News news={popularNews} title="Popular News" />
+      <News news={latestNews} error={latestNewsError} title="Latest News" />
+      <News news={popularNews} error={popularNewsError} title="Popular News" />
     </div>
   );
 }
