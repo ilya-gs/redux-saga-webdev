@@ -1,8 +1,10 @@
 import './news.css';
 
 const News = ({ news, error, title }) => {
+  
+  
   if (!news || news.length === 0) {
-    return error ? <h2>{error}</h2> : null;
+    return error ? <h2>{error}</h2> : <h2>{title}: No News</h2>;
   }
 
   return (

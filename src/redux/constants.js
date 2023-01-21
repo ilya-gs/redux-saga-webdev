@@ -3,11 +3,14 @@ export const counterActions = {
     DECREASE: "COUNTER_DECREASE"
 }
 
+export const commonActions = {
+    SET_LOCATION: "COMMON_SET_LOCATION",
+}
+
 export const newsActions = {
-    GET_LATEST: "NEWS_GET_LATEST",
-    GET_POPULAR: "NEWS_GET_POPULAR",
     SET_LATEST: "NEWS_SET_LATEST",
     SET_POPULAR: "NEWS_SET_POPULAR",
+    SET_LOADING: "NEWS_SET_LOADING",
 }
 
 export const errorActions = {

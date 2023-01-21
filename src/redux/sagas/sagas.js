@@ -1,6 +1,5 @@
 import {take, takeEvery, takeLatest, takeLeading, select, put, call, fork, all, spawn} from "redux-saga/effects"
-import { counterActions, newsActions } from "../constants";
-import counter from "../reducers/counter";
+import { commonActions, counterActions, newsActions } from "../constants";
 import { getLatestNews, getPopularNews } from "../../api/api";
 import { errorActionCreators, newsActionCreators } from "../actionCreator";
 
@@ -31,30 +30,22 @@ export function* handlePopularNews() {
     }
 }
 
-//====================================================//
 
-export function* watchPopularNews() {
-    // yield takeEvery(newsActions.GET_LATEST, handleLatestNews);
-    yield takeEvery(newsActions.GET_POPULAR, handlePopularNews);
 
-    // yield take(counterActions.DECREASE);
-    // console.log("watch 2");
-}
 
-//====================================================//
-
-export function* watchLatestNews() {
-    yield takeEvery(newsActions.GET_LATEST, handleLatestNews);
-    // yield takeEvery(newsActions.GET_POPULAR, handlePopularNews);
-
+export function* watchNewSaga() {
+    yield put(newsActionCreators.SET_LOADING(true));
+    const path = yield select(({ router }) => router.location.pathname)
+    if (path === '/popular-news')
+        yield call(handlePopularNews)
+    if (path === '/latest-news')
+        yield call(handleLatestNews)
+    yield put(newsActionCreators.SET_LOADING(false));
 }
 
 //====================================================//
 
 export default function* rootSaga() {
     // console.log("🚀 ~ file: index.js:4 ~ rootSaga ~ HEllo SAGA world")
-    yield all([
-        fork(watchLatestNews),
-        fork(watchPopularNews),
-    ])
+    yield takeLatest(commonActions.SET_LOCATION,watchNewSaga)
 }

@@ -1,15 +1,29 @@
 import Header from "./components/header/header";
 import Footer from "./components/footer/footer";
+import { useLocation } from "react-router";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { commonActionCreators } from "./redux/actionCreator";
 
-const App = ({ children }) => (
-  <>
-    <Header />
-    <main>
-      {children}
-    </main>
-    <Footer />
-  </>
-);
+const App = ({ children }) => {
+  let location = useLocation();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    console.log('New Location: ', location);
+    dispatch(commonActionCreators.SET_LOCATION(location));
+  }, [location]);
+
+  return (
+    <>
+      <Header />
+      <main>
+        {children}
+      </main>
+      <Footer />
+    </>
+  )
+};
 
 export default App;
 
