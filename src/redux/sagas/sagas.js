@@ -1,4 +1,4 @@
-import {takeLatest, select, put, call, fork,join} from "redux-saga/effects"
+import {takeLatest, select, put, call} from "redux-saga/effects"
 import { commonActions } from "../constants";
 import { getLatestNews, getPopularNews } from "../../api/api";
 import { errorActionCreators, newsActionCreators } from "../actionCreator";
