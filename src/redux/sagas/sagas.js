@@ -1,5 +1,5 @@
-import {take, takeEvery, takeLatest, takeLeading, select, put, call, fork, all, spawn, delay, throttle, retry, apply, join} from "redux-saga/effects"
-import { commonActions, counterActions, newsActions } from "../constants";
+import {takeLatest, select, put, call, fork,join} from "redux-saga/effects"
+import { commonActions } from "../constants";
 import { getLatestNews, getPopularNews } from "../../api/api";
 import { errorActionCreators, newsActionCreators } from "../actionCreator";
 

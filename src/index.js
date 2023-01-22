@@ -5,7 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import store from './redux/store';
-import { Route, Router, Routes } from 'react-router';
+import { Route, Routes } from 'react-router';
 import Home from './pages/home/home';
 import LatestNews from './pages/latest-news/latest-news';
 import PopularNews from './pages/popular-news/popular-news';
