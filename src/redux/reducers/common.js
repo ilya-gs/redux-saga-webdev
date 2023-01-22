@@ -8,7 +8,7 @@ const common = (state = initialState, {type,payload}) => {
     switch(type){
         
         case commonActions.SET_LOCATION:
-            console.log("SET_LATEST_ERROR");
+            console.log("SET_LOCATION");
             return {
                 ...state, 
                 location: payload

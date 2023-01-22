@@ -1,4 +1,4 @@
-import {take, takeEvery, takeLatest, takeLeading, select, put, call, fork, all, spawn} from "redux-saga/effects"
+import {take, takeEvery, takeLatest, takeLeading, select, put, call, fork, all, spawn, delay, throttle, retry, apply, join} from "redux-saga/effects"
 import { commonActions, counterActions, newsActions } from "../constants";
 import { getLatestNews, getPopularNews } from "../../api/api";
 import { errorActionCreators, newsActionCreators } from "../actionCreator";
@@ -10,6 +10,7 @@ import { errorActionCreators, newsActionCreators } from "../actionCreator";
 export function* handleLatestNews() {
     try {
         const data = yield call(getLatestNews, "react");        
+        //const data = yield apply(getLatestNews, ["react"]);
         console.log("🚀 ~ file: sagas.js:13 ~ function*handleLatestNews ~ data", data);
         yield put(newsActionCreators.SET_LATEST(data.hits));
     } catch (error) {
@@ -31,9 +32,11 @@ export function* handlePopularNews() {
 }
 
 
-
+//====================================================//
 
 export function* watchNewSaga() {
+    // yield delay(2000);
+    // console.log('delay expired');
     yield put(newsActionCreators.SET_LOADING(true));
     const path = yield select(({ router }) => router.location.pathname)
     if (path === '/popular-news')
@@ -42,10 +45,32 @@ export function* watchNewSaga() {
         yield call(handleLatestNews)
     yield put(newsActionCreators.SET_LOADING(false));
 }
+//====================================================//
+
+// export function* error() {
+//     console.log('error!!1');
+//     throw new Error('test error');
+// }
+
+//====================================================//
+
+export function* loadTest() {
+    const { hits } = yield call(getPopularNews);
+    return hits;
+}
+
 
 //====================================================//
 
 export default function* rootSaga() {
+    //yield throttle(5000,commonActions.SET_LOCATION, () => console.log('throtled'));
     // console.log("🚀 ~ file: index.js:4 ~ rootSaga ~ HEllo SAGA world")
-    yield takeLatest(commonActions.SET_LOCATION,watchNewSaga)
+
+    // yield retry(5, 2000, error);
+
+    yield takeLatest(commonActions.SET_LOCATION, watchNewSaga)
+    
+    const news = yield fork(loadTest);
+    const [first] =yield join(news)
+    console.log(first);
 }
