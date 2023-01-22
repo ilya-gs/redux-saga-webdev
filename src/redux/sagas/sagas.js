@@ -70,7 +70,7 @@ export default function* rootSaga() {
 
     yield takeLatest(commonActions.SET_LOCATION, watchNewSaga)
     
-    const news = yield fork(loadTest);
-    const [first] =yield join(news)
-    console.log(first);
+//    const news = yield fork(loadTest);
+//    const [first] =yield join(news)
+//    console.log(first);
 }

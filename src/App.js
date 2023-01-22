@@ -11,7 +11,7 @@ const App = ({ children }) => {
 
   useEffect(() => {
     console.log('New Location: ', location);
-    dispatch(commonActionCreators.SET_LOCATION(location.pathname));
+    dispatch(commonActionCreators.SET_LOCATION(location));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
 
